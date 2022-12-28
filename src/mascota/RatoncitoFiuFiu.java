@@ -1,11 +1,29 @@
 package mascota;
 
 public class RatoncitoFiuFiu {
-    //
-    // La clase mascota.RatoncitoFiuFiu aun no tiene ningun atributo
-    //
 
-    public RatoncitoFiuFiu(String nombre, int i, int i1, int i2, int i3, int i4) {
+    private String nombre;
+
+    private int edad;
+
+    private double peso;
+
+    private byte hambre;
+
+    private byte suciedad;
+
+    private byte salud;
+
+    private byte energia;
+
+    public RatoncitoFiuFiu(String nombre, int peso, byte hambre, byte suciedad, byte salud, byte energia) {
+       this.nombre = nombre;
+       this.peso = peso;
+       this.hambre = hambre;
+       this.suciedad = suciedad;
+       this.salud = salud;
+       this.energia = energia;
+
         // Un objeto mascota.RatoncitoFiuFiu debería informar cuando nace...
     }
 
