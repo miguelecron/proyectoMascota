@@ -38,11 +38,11 @@ public class RatoncitoFiuFiu {
 
         final StringBuilder sb = new StringBuilder();
         sb.append("Nombre de la mascota ").append(nombre);
-        sb.append("Edad ").append(edad);
-        sb.append("Peso ").append(peso);
-        sb.append("Suciedad ").append(suciedad);
-        sb.append("Salud ").append(salud);
-        sb.append("Energia ").append(energia);
+        sb.append("\nEdad ").append(edad);
+        sb.append("\nPeso ").append(peso);
+        sb.append("\nSuciedad ").append(suciedad);
+        sb.append("\nSalud ").append(salud);
+        sb.append("\nEnergia ").append(energia);
 
         return sb.toString();
     }
