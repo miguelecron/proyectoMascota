@@ -141,10 +141,9 @@ public class RatoncitoFiuFiu {
 
 
         if (segundos < 600) {
-            hambre++;
-            suciedad += 10;
-            salud -= 10;
-            energia -= 10;
+            aumentarHambre();
+            ensuciar();
+            perderSalud();
             perderPeso();
             perderEnergia();
         }
@@ -229,35 +228,56 @@ public class RatoncitoFiuFiu {
 
         switch (hambre) {
             case 1, 2:
-                if (energia >= 40) {
-                    energia -= 40;
+                if (energia >= 10) {
+                    energia -= 10;
                 } else {
                     energia = 0;
                 }
                 break;
             case 3, 4:
-                if (energia >= 25) {
-                    energia -= 25;
+                if (energia >= 5) {
+                    energia -= 5;
                 } else {
                     energia = 0;
                 }
                 break;
             case 5, 6:
-                if (energia >= 15){
-                    energia -= 15;
+                if (energia >= 3) {
+                    energia -= 3;
                 } else {
                     energia = 0;
                 }
                 break;
             case 7, 8:
-                if (energia >= 5){
-                    energia -= 5;
+                if (energia >= 1) {
+                    energia -= 1;
                 } else {
                     energia = 0;
                 }
                 break;
             case 9, 10:
                 break;
+        }
+    }
+
+    private void aumentarHambre() {
+
+        if (hambre < 10) {
+            hambre++;
+        }
+    }
+
+    private void ensuciar() {
+
+        if (suciedad < 100) {
+            suciedad += 3;
+        }
+    }
+
+    private void perderSalud(){
+
+        if (salud > 3){
+            salud -= 3;
         }
     }
 }
