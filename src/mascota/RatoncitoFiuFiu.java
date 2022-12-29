@@ -37,7 +37,7 @@ public class RatoncitoFiuFiu {
     public String estadisticas() {
 
         final StringBuilder sb = new StringBuilder();
-        sb.append("Nombre de la mascota ").append(nombre);
+        sb.append("Nombre de la mascota: ").append(nombre);
         sb.append("\nEdad ").append(edad);
         sb.append("\nPeso ").append(peso);
         sb.append("\nSuciedad ").append(suciedad);
@@ -140,7 +140,7 @@ public class RatoncitoFiuFiu {
         edad += segundos;
 
 
-        if (segundos < 600) {
+        if (segundos > 600) {
             aumentarHambre();
             ensuciar();
             perderSalud();
