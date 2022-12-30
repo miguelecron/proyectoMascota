@@ -114,7 +114,7 @@ public class RatoncitoFiuFiu {
 
     private boolean estaGordo() {
 
-        if (peso > 60) {
+        if (peso > 100) {
             return true;
         }
         return false;
@@ -221,7 +221,10 @@ public class RatoncitoFiuFiu {
     }
 
     private void aumentarSalud(float cantidadSalud) {
-        salud++;
+
+        if (salud < 100){
+            salud ++;
+        }
     }
 
     private void perderEnergia() {
