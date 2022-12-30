@@ -22,11 +22,11 @@ public class RatoncitoFiuFiu {
 
     private final int VIEJO = 2;
 
-    private int cambiarEstado = 120;
+    private int cambiarEstado = 120; // almacena los segundos que va a tardar en cambiar el estado
 
-    private int envejecer;
+    private int envejecer;      // almacena el tiempo desde el ultimo cambio de estado
 
-    private int energiaAnterior = 50;
+    private int energiaAnterior = 50;   // almacena la energia anterior al ultimo sueño
 
     public RatoncitoFiuFiu(String nombre, int peso, byte hambre, byte suciedad, byte salud, byte energia) {
         this.nombre = nombre;
@@ -55,11 +55,11 @@ public class RatoncitoFiuFiu {
 
     public int queTramoEdad() {
 
-        if (edad < 2880) {            // de 0 a 2 dias
+        if (edad < 172800) {            // de 0 a 2 dias
             return INFANCIA;
-        } else if (edad < 5760) {   // de 2 a 4 dias
+        } else if (edad < 345600) {   // de 2 a 4 dias
             return ADULTO;
-        } else if (edad < 11520) {  // de 4 a 6 dias
+        } else if (edad < 518400) {  // de 4 a 6 dias
             return VIEJO;
         }
 
@@ -89,9 +89,7 @@ public class RatoncitoFiuFiu {
             energiaAnterior = energia;
         }
 
-
         return estaDormido;
-
     }
 
     public boolean estasEnfermo() {
@@ -112,7 +110,7 @@ public class RatoncitoFiuFiu {
 
     public boolean estasMuerto() {
 
-        if (salud == 0 || edad > 11520) {
+        if (salud == 0 || edad > 518400) {
             return true;
         }
 
@@ -206,7 +204,7 @@ public class RatoncitoFiuFiu {
     }
 
     private void ganarPeso(float cantidadAlimento) {
-        peso += cantidadAlimento / 4;             // aumenta un cuarto del alimento cada vez que come
+        peso += (cantidadAlimento / 4);             // aumenta un cuarto del alimento cada vez que come
     }
 
     private void perderPeso() {

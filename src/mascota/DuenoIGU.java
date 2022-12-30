@@ -223,7 +223,7 @@ public class DuenoIGU extends JFrame {
 
     void botonAlimentar_mouseClicked(MouseEvent e) {
         // Aqui alimentamos a la mascota
-        mascota.alimentar(15);
+        mascota.alimentar(1);
     }
 
     void botonCurar_mouseClicked(MouseEvent e) {
