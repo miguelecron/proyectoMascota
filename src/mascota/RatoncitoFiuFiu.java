@@ -22,6 +22,12 @@ public class RatoncitoFiuFiu {
 
     private final int VIEJO = 2;
 
+    private int cambiarEstado = 120;
+
+    private int envejecer;
+
+    private int energiaAnterior = 50;
+
     public RatoncitoFiuFiu(String nombre, int peso, byte hambre, byte suciedad, byte salud, byte energia) {
         this.nombre = nombre;
         edad = 0;
@@ -62,18 +68,27 @@ public class RatoncitoFiuFiu {
 
     public boolean estasDormido() {
 
-        int energiaAnerior = 50;
-        int variacionEnergia = energiaAnerior - energia;
+        int variacionEnergia = energiaAnterior - energia;
         boolean estaDormido = false;
 
-        if (variacionEnergia > 20) {
+        if (energia <= 50) {
             estaDormido = true;
         }
-        if (variacionEnergia < -20) {
+
+        if (energia >= 75) {
             estaDormido = false;
         }
 
-        energiaAnerior = energia;
+        if (variacionEnergia > 20) {
+            estaDormido = true;
+            energiaAnterior = energia;
+        }
+
+        if (variacionEnergia < -20) {
+            estaDormido = false;
+            energiaAnterior = energia;
+        }
+
 
         return estaDormido;
 
@@ -137,15 +152,19 @@ public class RatoncitoFiuFiu {
     }
 
     public void envejecer(int segundos) {
+
+        envejecer += segundos;
         edad += segundos;
 
-
-        if (segundos > 600) {
+        if (envejecer == cambiarEstado) {
             aumentarHambre();
             ensuciar();
             perderSalud();
             perderPeso();
             perderEnergia();
+
+            envejecer = 0;
+            cambiarEstado = (int) (Math.random() * 1200) + 150;
         }
 
     }
@@ -187,14 +206,14 @@ public class RatoncitoFiuFiu {
     }
 
     private void ganarPeso(float cantidadAlimento) {
-        peso++;             // aumenta una unidad de peso cada vez que come
+        peso += cantidadAlimento / 4;             // aumenta un cuarto del alimento cada vez que come
     }
 
     private void perderPeso() {
 
         if (hambre < 4) {
-            if (peso >= 10) {
-                peso -= 10;
+            if (peso >= 3) {
+                peso -= 3;
             } else {
                 peso = 0;
             }
@@ -222,8 +241,8 @@ public class RatoncitoFiuFiu {
 
     private void aumentarSalud(float cantidadSalud) {
 
-        if (salud < 100){
-            salud ++;
+        if (salud < 100) {
+            salud++;
         }
     }
 
@@ -271,15 +290,18 @@ public class RatoncitoFiuFiu {
     }
 
     private void ensuciar() {
+        int ensuciarAleatorio = (int) (Math.random() * 19 + 1);
 
-        if (suciedad < 100) {
-            suciedad += 3;
+        if (suciedad + ensuciarAleatorio < 100) {
+            suciedad += ensuciarAleatorio;
+        } else {
+            suciedad = 100;
         }
     }
 
-    private void perderSalud(){
+    private void perderSalud() {
 
-        if (salud > 3){
+        if (salud > 3) {
             salud -= 3;
         }
     }
