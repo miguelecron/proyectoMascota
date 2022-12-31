@@ -14,7 +14,7 @@ public class RatoncitoFiuFiu {
 
     private byte salud;         // 0 (muerto) a 100 (totalmente sano)
 
-    private byte energia;       // 0 (apatico) a 100 (extremadamente activo)
+    private double energia;       // 0 (apatico) a 100 (extremadamente activo)
 
     private final int INFANCIA = 0;
 
@@ -36,7 +36,14 @@ public class RatoncitoFiuFiu {
         this.suciedad = suciedad;
         this.salud = salud;
         this.energia = energia;
-        // Un objeto mascota.RatoncitoFiuFiu debería informar cuando nace...
+    }
+
+    // Un objeto mascota.RatoncitoFiuFiu debería informar cuando nace...
+    public String nacimientoMascota() {
+
+        String mensajeNacimiento = "Ha nacido una nueva mascota llamada " + nombre;
+
+        return mensajeNacimiento;
     }
 
 
@@ -48,11 +55,13 @@ public class RatoncitoFiuFiu {
         sb.append("\nPeso ").append(peso);
         sb.append("\nSuciedad ").append(suciedad);
         sb.append("\nSalud ").append(salud);
-        sb.append("\nEnergia ").append(energia);
+        sb.append("\nEnergia ").append((int)energia);
+        sb.append("\nHambre ").append(hambre);
 
         return sb.toString();
     }
 
+    // Estipulamos la edad de la mascota
     public int queTramoEdad() {
 
         if (edad < 172800) {            // de 0 a 2 dias
@@ -66,9 +75,10 @@ public class RatoncitoFiuFiu {
         return 0;
     }
 
+    //Comprobamos si esta dormida
     public boolean estasDormido() {
 
-        int variacionEnergia = energiaAnterior - energia;
+        int variacionEnergia = (int) (energiaAnterior - energia);
         boolean estaDormido = false;
 
         if (energia <= 50) {
@@ -81,12 +91,12 @@ public class RatoncitoFiuFiu {
 
         if (variacionEnergia > 20) {
             estaDormido = true;
-            energiaAnterior = energia;
+            energiaAnterior = (int) energia;
         }
 
         if (variacionEnergia < -20) {
             estaDormido = false;
-            energiaAnterior = energia;
+            energiaAnterior = (int) energia;
         }
 
         return estaDormido;
@@ -94,7 +104,7 @@ public class RatoncitoFiuFiu {
 
     public boolean estasEnfermo() {
 
-        if (salud <= 70) {
+        if (salud <= 60) {
             return true;
         }
         return false;
@@ -110,7 +120,7 @@ public class RatoncitoFiuFiu {
 
     public boolean estasMuerto() {
 
-        if (salud == 0 || edad > 518400) {
+        if (salud <= 0 || edad > 518400) {
             return true;
         }
 
@@ -154,16 +164,29 @@ public class RatoncitoFiuFiu {
         envejecer += segundos;
         edad += segundos;
 
+
         if (envejecer == cambiarEstado) {
-            aumentarHambre();
-            ensuciar();
-            perderSalud();
-            perderPeso();
-            perderEnergia();
+            int accionRealizar = (int) (Math.random() * 5);
+
+            switch (accionRealizar) {
+                case 0:
+                    aumentarHambre();
+                    break;
+                case 1:
+                    ensuciar();
+                    break;
+                case 2:
+                    perderSalud();
+                    break;
+                case 3:
+                    perderPeso();
+                    break;
+            }
 
             envejecer = 0;
             cambiarEstado = (int) (Math.random() * 1200) + 150;
         }
+        perderEnergia();
 
     }
 
@@ -209,7 +232,7 @@ public class RatoncitoFiuFiu {
 
     private void perderPeso() {
 
-        if (hambre < 4) {
+        if (hambre > 4) {
             if (peso >= 3) {
                 peso -= 3;
             } else {
@@ -226,8 +249,8 @@ public class RatoncitoFiuFiu {
         }
     }
 
-    private void aumentarEnergia(float cantidadEnergia) {
-        float topeAumento = energia + (cantidadEnergia * 5);
+    private void aumentarEnergia(double cantidadEnergia) {
+        double topeAumento = energia + (cantidadEnergia * 5);
 
         if (topeAumento > 100) {
             energia = 100;
@@ -247,48 +270,59 @@ public class RatoncitoFiuFiu {
     private void perderEnergia() {
 
         switch (hambre) {
-            case 1, 2:
-                if (energia >= 10) {
-                    energia -= 10;
-                } else {
-                    energia = 0;
+            case 0:
+                if (energia >= 70) {
+                    energia -= 0.001;
                 }
                 break;
+            case 1:
+                if (energia >= 65){
+                    energia -= 0.002;
+                }
             case 3, 4:
-                if (energia >= 5) {
-                    energia -= 5;
-                } else {
-                    energia = 0;
+                if (energia >= 60) {
+                    energia -= 0.003;
                 }
                 break;
-            case 5, 6:
-                if (energia >= 3) {
-                    energia -= 3;
-                } else {
-                    energia = 0;
+            case 5:
+                if (energia >= 55){
+                    energia -= 0.004;
+                }
+            case 6:
+                if (energia >= 45) {
+                    energia -= 0.005;
                 }
                 break;
             case 7, 8:
-                if (energia >= 1) {
-                    energia -= 1;
-                } else {
-                    energia = 0;
+                if (energia >= 30) {
+                    energia -= 0.006;
                 }
                 break;
-            case 9, 10:
+            case 9:
+                if (energia >= 15)
+                    energia -= 0.007;
                 break;
+
+            case 10:
+                if (energia >= 1){
+                    energia -= 0.008;
+                }
         }
     }
 
     private void aumentarHambre() {
+        int aumentarHambre_aleatorio = (int) (Math.random() * 4 + 1);
+        int topeHambre = hambre + aumentarHambre_aleatorio;
 
-        if (hambre < 10) {
-            hambre++;
+        if (topeHambre < 10) {
+            hambre += aumentarHambre_aleatorio;
+        } else {
+            hambre = 10;
         }
     }
 
     private void ensuciar() {
-        int ensuciarAleatorio = (int) (Math.random() * 19 + 1);
+        int ensuciarAleatorio = (int) (Math.random() * 24 + 1);
 
         if (suciedad + ensuciarAleatorio < 100) {
             suciedad += ensuciarAleatorio;
@@ -298,9 +332,12 @@ public class RatoncitoFiuFiu {
     }
 
     private void perderSalud() {
+        int perderSalud_aleatorio = (int) (Math.random() * 24 + 1);
 
-        if (salud > 3) {
-            salud -= 3;
+        if (salud > perderSalud_aleatorio) {
+            salud -= perderSalud_aleatorio;
+        } else {
+            salud = 0;
         }
     }
 }

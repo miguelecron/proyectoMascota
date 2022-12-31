@@ -140,7 +140,8 @@ public class DuenoIGU extends JFrame {
 
     //Construir el marco
     public DuenoIGU() {
-        mascota = new RatoncitoFiuFiu("Tamagochi", 50, (byte) 50, (byte) 50, (byte) 100, (byte) 100);
+        mascota = new RatoncitoFiuFiu("Tamagotchi", 50, (byte) 7, (byte) 50, (byte) 100, (byte) 100);
+        mostrarNacimientoMascota();
         temporizador = new Timer();
         temporizador.schedule(new Envejecimiento(mascota, labelGrafica), 0, 500);
         horaAnterior = System.currentTimeMillis();
@@ -240,6 +241,10 @@ public class DuenoIGU extends JFrame {
         //Aqu� pedimos estadisticas
         labelSalida.setText(mascota.estadisticas());
         horaAnterior = System.currentTimeMillis();
+    }
+
+    void mostrarNacimientoMascota(){
+        labelSalida.setText(mascota.nacimientoMascota());
     }
 
     void hazmeCaso() {
