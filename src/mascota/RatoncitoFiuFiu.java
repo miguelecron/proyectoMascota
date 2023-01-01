@@ -6,7 +6,7 @@ public class RatoncitoFiuFiu {
 
     private int edad;
 
-    private double peso;
+    private double peso;        // en gramos
 
     private byte hambre;        //  0 (saciado) a 10 (hambriento)
 
@@ -156,6 +156,10 @@ public class RatoncitoFiuFiu {
         if (estasSucio() || tienesHambre() || estasEnfermo() || estaGordo()) {
             return true;
         }
+        return false;
+    }
+
+    public boolean jugar(float cantidadDiversion){
         return false;
     }
 
